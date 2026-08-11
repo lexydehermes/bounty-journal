@@ -9,6 +9,8 @@
   // State
   let activeFilter = 'all';
   let searchQuery = '';
+  let journalEntries = [];      // loaded from Supabase (fallback: static)
+  let totalBugs = 0, totalCriticals = 0, totalBounties = 0;
 
   // DOM refs
   const entriesGrid = document.getElementById('entriesGrid');
@@ -19,10 +21,22 @@
   const modalClose = document.getElementById('modalClose');
   const emptyState = document.getElementById('emptyState');
 
-  // Init hero stats
-  document.getElementById('totalBugs').textContent = totalBugs;
-  document.getElementById('totalCriticals').textContent = totalCriticals;
-  document.getElementById('totalBounties').textContent = formatBounty(totalBounties);
+  function computeStats() {
+    totalBugs = journalEntries.length;
+    totalCriticals = journalEntries.filter(e => e.severity === 'critical').length;
+    totalBounties = journalEntries.reduce((sum, e) => sum + (e.bounty || 0), 0);
+  }
+
+  function formatBounty(amount) {
+    if (!amount || amount === 0) return '$0';
+    return '$' + Number(amount).toLocaleString();
+  }
+
+  function renderStats() {
+    document.getElementById('totalBugs').textContent = totalBugs;
+    document.getElementById('totalCriticals').textContent = totalCriticals;
+    document.getElementById('totalBounties').textContent = formatBounty(totalBounties);
+  }
 
   // Render entries
   function getFilteredEntries() {
@@ -201,7 +215,25 @@
     return div.innerHTML;
   }
 
-  // Initial render
-  renderEntries();
+  // ============================================
+  // Boot: load entries from Supabase, fallback to static data.js
+  // ============================================
+  async function boot() {
+    entriesGrid.innerHTML = '<div class="loading">Loading entries…</div>';
+    try {
+      journalEntries = await fetchEntries();
+      if (!journalEntries.length && typeof staticEntries !== 'undefined') {
+        journalEntries = staticEntries;
+      }
+    } catch (err) {
+      console.warn('Supabase unavailable, using static fallback:', err);
+      journalEntries = (typeof staticEntries !== 'undefined') ? staticEntries : [];
+    }
+    computeStats();
+    renderStats();
+    renderEntries();
+  }
+
+  boot();
 
 })();

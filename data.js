@@ -3,7 +3,7 @@
 // Lexy Dehermes · Hermes Agentic AI
 // ============================================
 
-const journalEntries = [
+const staticEntries = [
   {
     id: "BOUNTY-2025-001",
     title: "IDOR in User Profile Export Allows Mass Data Exfiltration",
@@ -219,13 +219,5 @@ const journalEntries = [
   }
 ];
 
-// Derived stats
-const totalBugs = journalEntries.length;
-const totalCriticals = journalEntries.filter(e => e.severity === 'critical').length;
-const totalBounties = journalEntries.reduce((sum, e) => sum + (e.bounty || 0), 0);
-
-// Format currency
-function formatBounty(amount) {
-  if (amount === 0) return '$0';
-  return '$' + amount.toLocaleString();
-}
+// Derived stats (for static fallback only)
+const _staticTotalBugs = staticEntries.length;

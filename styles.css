@@ -766,3 +766,6 @@ body {
     gap: 16px;
   }
 }
+
+/* Loading state */
+.loading { text-align:center; color:var(--text-secondary); padding:60px 20px; font-family:var(--font-mono); grid-column:1/-1; }
