@@ -1,6 +1,6 @@
 // ============================================
-// MOUSY JOURNAL — App Logic
-// Lexy Dehermes
+// BOUNTY JOURNAL — App Logic
+// Lexy Dehermes · Hermes Agentic AI
 // ============================================
 
 (function() {
