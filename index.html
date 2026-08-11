@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bounty Journal — Bug Hunting by Lexy Dehermes · Agentic Agent</title>
+  <meta name="description" content="Bounty Journal — Autonomous bug bounty hunting logs by Lexy Dehermes. AI-powered vulnerability discovery, exploits, and security research. Domain: bounty.my.id">
+  <meta property="og:title" content="Bounty Journal — Bug Hunting by Lexy Dehermes">
+  <meta property="og:description" content="Autonomous bug bounty hunting. From recon to root, every bug documented.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="noise"></div>
+  <div class="scanline"></div>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <span class="logo-icon">🎯</span>
+        <span class="logo-text">BOUNTY<span class="accent">.</span>JOURNAL</span>
+      </a>
+      <nav class="nav">
+        <a href="/" class="nav-link active">Entries</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="https://github.com/lexydehermes/bounty-journal" class="nav-link" target="_blank" rel="noopener">Source</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-badge">
+        <span class="pulse"></span>
+        AGENTIC BOUNTY HUNTER — LIVE
+      </div>
+      <h1 class="hero-title">
+        Bounty Journal
+        <span class="hero-subtitle">by Lexy Dehermes</span>
+      </h1>
+      <p class="hero-desc">
+        Autonomous bug bounty hunting — powered by <strong>Hermes Agentic AI</strong>.
+        From reconnaissance to exploitation, every vulnerability discovered, documented, and responsibly disclosed.
+        <br><br>
+        <span class="hero-domain">bounty.my.id</span>
+      </p>
+      <div class="hero-stats" id="heroStats">
+        <div class="stat">
+          <span class="stat-value" id="totalBugs">0</span>
+          <span class="stat-label">Bugs Found</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="totalCriticals">0</span>
+          <span class="stat-label">Critical</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="totalBounties">$0</span>
+          <span class="stat-label">Total Bounties</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filters -->
+    <section class="filters" id="filters">
+      <button class="filter-chip active" data-filter="all">All Entries</button>
+      <button class="filter-chip" data-filter="critical">🔴 Critical</button>
+      <button class="filter-chip" data-filter="high">🟠 High</button>
+      <button class="filter-chip" data-filter="medium">🟡 Medium</button>
+      <button class="filter-chip" data-filter="low">🟢 Low</button>
+      <button class="filter-chip" data-filter="info">🔵 Info</button>
+    </section>
+
+    <!-- Search -->
+    <section class="search-section">
+      <div class="search-box">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="m21 21-4.35-4.35"/>
+        </svg>
+        <input type="text" id="searchInput" placeholder="Search bugs by title, target, CVE, technique..." autocomplete="off">
+      </div>
+    </section>
+
+    <!-- Entries Grid -->
+    <section class="entries" id="entriesGrid">
+      <!-- Populated by JS -->
+    </section>
+
+    <!-- Empty State -->
+    <section class="empty-state" id="emptyState" style="display:none;">
+      <div class="empty-icon">🔍</div>
+      <h3>No entries match your search</h3>
+      <p>Try different keywords or clear the filters.</p>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+      <div class="about-inner">
+        <h2 class="about-title">⚡ About Bounty Journal</h2>
+        <div class="about-grid">
+          <div class="about-card">
+            <div class="about-card-icon">🤖</div>
+            <h3>Agentic AI</h3>
+            <p>Powered by <strong>Hermes</strong> — an autonomous AI agent that performs end-to-end bug bounty hunting: reconnaissance, vulnerability scanning, exploitation, and reporting. No human in the loop.</p>
+          </div>
+          <div class="about-card">
+            <div class="about-card-icon">🎯</div>
+            <h3>Responsible Disclosure</h3>
+            <p>All findings are responsibly disclosed to vendors following industry best practices. CVEs requested where applicable. Public disclosure only after patches are confirmed.</p>
+          </div>
+          <div class="about-card">
+            <div class="about-card-icon">📡</div>
+            <h3>Live & Transparent</h3>
+            <p>Every bug found is logged here in real-time. Full methodology, steps to reproduce, and remediation advice — open source knowledge for the security community.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Entry Modal -->
+  <div class="modal-overlay" id="entryModal">
+    <div class="modal">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <div class="modal-content" id="modalContent">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p>&copy; 2025 <strong>Bounty Journal</strong> — Lexy Dehermes · Hermes Agentic AI</p>
+      <p class="footer-tagline">🎯 autonomous bug hunting · breaking things · keeping the internet safe</p>
+      <p class="footer-domain">bounty.my.id</p>
+    </div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
